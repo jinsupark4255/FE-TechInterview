@@ -1,8 +1,8 @@
-# async, await
+# async/await
 ## 비동기 처리 방식
 - 자바스크립트는 싱글 스레드 프로그래밍 언어이기 때문에 비동기 처리가 기반이다.
 - 비동기 처리는 결과 반환 시기를 알 수 없기에 동기적으로 처리하는 기법이 사용되어야 한다.
-- async,await 방식이 있고 Promise 방식이 있다.
+- async/await 방식이 있고 Promise 방식이 있다.
 
 ## Promise 방식
 - 비동기 연산의 최종 완료와 그 결과값을 나타낸다.
@@ -20,7 +20,7 @@
     .catch(error => console.error(error))
   ```
 
-## async, await 방식
+## async/await 방식
 - 비동기 코드를 동기 코드처럼 보이게 하고 Promise 보다 작성하기 쉽게 만들어준다.
 - async 함수는 항상 Promise를 반환하며, 함수 내부에서 await 키워드를 사용하여 Promise의 해결을 기다릴 수 있다.
   ```js
