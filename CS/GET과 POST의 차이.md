@@ -1,1 +1,2 @@
-# 브라우저 주소창에 검색 시 일어나는 일
+# GET과 POST 차이
+![image](https://github.com/jinsupark4255/FE-TechInterview/assets/116702892/698007e5-b5d5-405d-927c-5218b6c673b6)
