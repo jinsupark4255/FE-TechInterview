@@ -16,11 +16,41 @@
   Rejected (거부됨) : 연산이 실패한 상태
   ```
 - Promise를 사용하면 비동기 작업의 결과를 체인 형태로 연결할 수 있으며, 'then', 'catch' 메소드를 사용하여 성공, 실패, 완료 시 수행할 작업을 지정할 수 있다.
-  ```js
+  ```tsx
   fetchExample()
     .then((result) => fetchExample2(result))
     .then((newResult) => fetchExample3(newResult))
     .catch((error) => console.error(error));
+  ```
+- Promise의 .then과 .catch는 콜백 함수를 인자로 받으며, .then의 콜백 함수의 인자에 resolve 결과 값을 넘겨주며 .catch의 콜백 함수의 인자에 reject 결과 값을 넘겨준다.
+  ```tsx
+  fetch('https://example.com/posts')
+    .then(function(response){ //이름 없는 콜백함수와, 그 인자로 resolve 결과값인 response 넘겨줌
+      response.json().then(function(data){ //response.json()이 Promise를 또 반환
+        console.log('data', data);
+      });
+    });
+    .catch(function(reason){
+      console.log('reason',reason);
+    });
+  ```
+- 또한 .then의 인자인 콜백함수가 Promise를 반환하지 않더라도 .then과 .catch는 그 결과를 Promise로 반환하기 때문에 .then 다음에 .then으로 계속 처리가 가능하다.
+  ```tsx
+  function handleResponse(response) {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return 'hello'; // 일반 문자열 반환
+  }  
+
+  fetch('https://example.com/data')
+    .then(handleResponse) // handleResponse에서 'hello'를 반환
+    .then(data => {
+      console.log('Received data:', data); // 'Received data: hello' 출력
+    })
+    .catch(error => {
+      console.error('Failed to fetch:', error);
+    });
   ```
 
 ## async/await 방식
@@ -44,7 +74,7 @@
 
 ### 가독성
 
-- async/await을 사용하면 비동기 코드를 거의 동기 코드처럼 작성할 수 있어 가독성이 향상된다. 반면 Promise 체인은 여러개의 .then() 호출로 인해 콜백 지옥에 빠질 수 있으며, 복잡한 로직에서는 코드 이해가 어려울 수 있다.
+- async/await을 사용하면 비동기 코드를 거의 동기 코드처럼 작성할 수 있어 가독성이 향상된다. 반면 Promise 체인은 여러개의 .then() 호출로 인해 콜백 지옥같은 thenable 지옥에 빠질 수 있으며, 복잡한 로직에서는 코드 이해가 어려울 수 있다.
 
 ### 오류 처리
 
